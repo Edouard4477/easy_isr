@@ -1,0 +1,55 @@
+{% load static %}
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="{% static 'css/Styleact.css'%}">
+	<title>Assistance Actuarielle</title>
+	</head>
+	<header>
+	<center>
+	<h2><img src="{% static 'images/Logo.png'%}" alt="Image"/><br>
+	<strong>OHADA - Calcul des provisions "Indémnités Services Rendus"</strong> </h2>
+	</center>
+	</header>
+	<nav>
+	<div id="conteneur2">
+	<div id="element2"><a href="{%url "home"%}">Accueil</a></div> 
+	<div id="element2"><a href="{%url "entree"%}"><mark>Calcul de la Provision</mark></a></div>
+	<div id="element2"><a href="{%url "entree"%}">Renseigner un accord particulier</a></div>
+	</nav>
+
+</br><h2>Evaluation actuarielle de vos engagements ISR au : {{Date_inv}}</h2></br></br>
+<p>Vos engagements en cas de vie sont de : <strong>{{vie_form}}</strong> FCFA</br></br>
+<p>Vos engagements en cas de décès sont de : <strong>{{deces_form}}</strong> FCFA</p></br></br>
+<p>Pour rappel, vous avez au {{Date_inv}}, <strong>{{effectif}}</strong> salariés pour une masse salariale totale de <strong>{{masse}}</strong> FCFA.</p></br></br>
+<p>Votre provision "Indémnités Services Rendus" pèse <strong>{{ratio}}</strong> de la masse salariale annuelle.</p></br>
+<p>La moyenne d'âge de vos salariés est de <strong>{{age_moy}}</strong> ans, dont voici la répartition :</p></br>
+<script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.13.0.min.js"></script>
+	{{div|safe}}
+	{{ script | safe }}
+	</br>
+<p>Le calcul a été réalisé selon les conditions d'indémnisation prévu selon : <strong>{{loi}}</strong></br></p></br>
+<p>Les conditions de calcul de l'indémnités service rendu est le suivant, à appliquer sur le salaire mensuel moyen des 12 derniers mois : </p></br>
+{% block content %}
+{% if prop == 1 %}
+	<p>Le taux de {{taux}} du traitement mensuel par année de service</p></br>
+{% endif %}
+{% if prop == 2 %}
+	<table align="center">
+	<tr>
+	<td><strong>Tranche ancienneté - debut</strong></td>
+	<td><strong>Tranche ancienneté - fin</strong></td>
+	<td><strong>Droit acquis par année de présence en part du salaire de référence</strong></td>
+	{% for i in table %}
+		<tr>
+		{% for j in i %}
+			<td>{{j}}</td>
+		{% endfor %}
+		</tr>
+	{% endfor %}
+	</table>
+{% endif %}
+{% endblock %}
+</br>
+<p>Pour ce calcul, vous avez pris l'hypothèse d'un turnover de : <strong>{{to}}</strong></br></p>
+</br>
+<p>Le calcul est réalisé selon les méthodes actuarielles universelles. Les tables de mortalités utilisées sont la table <strong>CIMAF</strong> en cas de vie et la <strong>CIMAH</strong> en cas de décès.</p>
