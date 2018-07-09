@@ -1,0 +1,275 @@
+p/*http://www.colorpicker.com/ references couleurs */
+{
+	color: black;
+	font-size: 12pxpx;
+	font-family: Verdana;
+	margin: 0px 60px 0px 60px;
+	/*background-color:#237CDB;*/
+}
+h1
+{
+	color: black;
+	font-size: 48px;
+	font-family: Verdana;
+}
+
+h2
+{
+	color: black;
+	font-size: 20px;
+	font-family: Verdana;
+	Margin: 0px 60px 0px 60px;
+}
+a
+{
+	color: white;
+	font-size: 16px;
+	font-family: Verdana;
+	font-style: ultra-condensed;
+	text-decoration;
+}
+a:hover
+{
+	color: black;
+	font-size: 16px;
+	font-family: Verdana;
+	/*font-style: ultra-condensed;*/
+	background-color: white;
+	padding: 6px 6px 6px 6px;
+	text-decoration;
+}
+a:focus
+{
+	font-style: bold;
+	color: grey;
+}
+b
+{
+	color: white;
+	font-size: 16px;
+	font-family: Verdana;
+	font-style: ultra-condensed;
+	font-color: #0795FA;
+	text-decoration;
+}
+b:hover
+{
+	color: black;
+	font-size: 16px;
+	font-family: Verdana;
+	/*font-style: ultra-condensed;*/
+	background-color: white;
+	padding: 6px 6px 6px 6px;
+	text-decoration;
+}
+b:focus
+{
+	font-style: bold;
+	color: grey;
+}
+em
+{
+	font-style: italic;
+}
+strong
+{
+	font-style: bold;
+}
+li
+{
+	font-family: Verdana;
+}
+h3
+{
+	color: black;
+	font-size: 16px;
+	font-family: Verdana;
+	font-style: bold;
+}
+h4
+{
+	color: green;
+	font-size: 14px;
+	font-family: Verdana;
+	text-align: justify;
+	font-style: bold;
+}
+body
+{
+	color: black;
+	font-size: 14px;
+	font-family: Verdana;
+	background-color : white/*#8ED9E8*/;/*#F0F76A;*/
+	/*background-image: url("building2.png");*/
+	margin: 0px 60px 0px 60px;
+}
+
+header
+{
+	background-color: white;
+	margin: 0px 0px 0px 0px;
+	border: 0px 30px 0px 30px;
+	border-bottom: 3px black solid;
+	/*box-shadow: 3px 3px 0px grey;*/
+}
+aside
+{
+	text-align: left;
+}
+footer
+{
+	background-color: white;
+	border-top: 3px black solid;
+	padding: 6px;
+	text-align: center;
+	margin: 0px 0px 0px 0px;
+}
+section
+{
+	background-color: white;
+	border: 1px black solid;
+	padding: 6px 6px 6px 6px;
+	margin: 0px 6px 0px 6px;
+	width: 300px;
+	background-color: white;
+	background-image: url("homme_baobab2.png");
+}
+h6
+{
+	color: black;
+	font-size: 14px;
+	font-family: Verdana;
+	text-align: justify;
+	font-style: italic;
+	margin: 0px 6px 0px 6px;
+}
+#conteneur
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	padding-top: 10px;
+	padding-left : 50px;
+	padding-right: 50px;
+}
+#element
+{
+	color: black;
+	font-size: 14px;
+	font-family: Verdana;
+	padding-top: 20px;
+	padding-right: 0px;
+	padding-left: 0px;
+	margin: 0px 5px 0px 5px;
+	background-color: #E6E6E6;
+}
+#conteneur2
+{
+	display: flex;
+	justify-content: center;
+	padding: 0px 60px 0px 60px;
+}
+#element2
+{
+	padding: 0px 24px 0px 24px;
+}
+nav
+{
+	color: black;
+	background-color: #095B9E;/*#0F8494;*/
+	padding: 6px 6px 6px 6px;
+	margin : 0px 0px 0px 0px;
+}
+h5
+{
+	color: black;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	font-size: 14px;
+	font-family: Verdana;
+	text-align: center;
+	background-color: #0795FA;
+}
+mark
+{
+	color: Black;
+	font-size: 16px;
+	font-family: Verdana;
+	font-style: bold;
+	background-color: white;
+	padding: 6px 6px 6px 6px;
+	text-decoration;
+}
+span
+{
+	background-color: #DFF2F5;
+	font-style: bold;
+}
+section2
+{
+	/*background-color: white;*/
+	/*border: 1px black solid;*/
+	padding: 6px 6px 6px 6px;
+	margin: 0px 6px 0px 6px;
+	width: 100px;
+	/*background-color: white;*/
+}
+h7
+{
+	color: white;
+	background-color: #6E4944;
+	font-size: 14px;
+	font-family: Trebuchet MS;
+	text-align: justify;
+	font-style: italic;
+	margin: 0px 0px 0px 0px;
+}
+section3
+{
+	/*background-color: white;*/
+	border: 1px black solid;
+	padding: 3px 6px 3px 6px;
+	margin: 0px 0px 0px 0px;
+	width: 288px;
+	background-color: #6E4944;
+}
+#conteneur3
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+}
+#element3
+{
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+}
+input[type=submit], input[type=reset] {
+ width:400px;
+ color:white;
+ font-style:bold;
+ margin:20px 20px 20px 20px;
+ padding: 5px 40px 5px 40px;
+ background-color:#0795FA;
+ font-family:Verdana;
+ border-radius:5px;
+ text-align:center;
+ }
+ input, textarea{
+	 width:400px;
+	 font-family:Verdana;
+	 font-size:16px;
+	 text-align:center;
+ }
+table{
+border-collapse: collapse;
+}
+ 
+td{
+border: 1px solid black;
+text-align: center;
+width: 125px;
+font-size:12px;
+}
