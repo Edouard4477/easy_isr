@@ -1,0 +1,5 @@
+Gabon - Code du travail
+proportion	1
+taux_an	0.2
+gie_décès	1
+debut	fin	droit

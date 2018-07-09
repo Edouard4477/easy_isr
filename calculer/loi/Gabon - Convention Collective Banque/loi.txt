@@ -1,0 +1,10 @@
+Gabon - Convention Collective BTP
+proportion	2
+taux_an	0.0
+gie_décès	1
+debut	fin	droit
+0	5	0.20
+6	10	0.30
+11	15	0.35
+16	20	0.40
+21	100	0.50

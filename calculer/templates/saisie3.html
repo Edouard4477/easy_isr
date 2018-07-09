@@ -1,0 +1,36 @@
+{% load static %}
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="{% static 'css/Styleact.css'%}">
+	<title>Assistance Actuarielle</title>
+	</head>
+	<header>
+	<center>
+	<h2><img src="{% static 'images/Logo.png'%}" alt="Image"/><br>
+	<strong>OHADA - Calcul des provisions "Indémnités Services Rendus"</strong> </h2>
+	</center>
+	</header>
+	<nav>
+	<div id="conteneur2">
+	<div id="element2"><a href="{%url "home"%}">Accueil</a></div> 
+	<div id="element2"><a href="{%url "entree"%}"><mark>Calcul de la Provision</mark></a></div>
+	<div id="element2"><a href="{%url "entree"%}">Renseigner un accord particulier</a></div>
+	</nav>
+<br><br>
+<center>
+<h2>Calcul de vos engagements ISR : Renseigner les informations de vos employés 3/6</h2><br><br>
+<p>Colonne 1 : identifiant</p><br>
+<p>Colonne 2 : Date de naissance</p><br>
+<p>Colonne 3 : Date d'embauche</p><br>
+<p>Colonne 4 : Salaire annuel</p><br>
+<form action="{% url "entree3" %}" method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <br><input type="submit" value="Etape suivante" />
+
+</form>
+</center>

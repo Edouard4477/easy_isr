@@ -1,0 +1,51 @@
+{% load static %}
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="{% static 'css/Styleact.css'%}">
+	<title>OHADA - Evaluation Actuarielle des Provisions ISR</title>
+	</head>
+	<header>
+	<center>
+	<h2><img src="{% static 'images/Logo.png'%}" alt="Image"/><br>
+	<strong>Calculez vos provisions Indémnités Services Rendus, conformément aux normes OHADA</strong> </h2>
+	</center>
+	</header>
+	<nav>
+	<div id="conteneur2">
+	<div id="element2"><a href="{%url "home"%}"><mark>Accueil</mark></a></div> 
+	<div id="element2"><a href="{%url "entree"%}">Calcul de la Provision</a></div>
+	<div id="element2"><a href="{%url "entree"%}">Renseigner un accord particulier</a></div>
+	</nav>
+<body>
+</br>
+<h2>Bonjour et Bienvenue! Réalisez facilement et à moindre coût le calcul de vos provisions ISR!</h2></center>
+</br>
+<p>Nous sommes le {{date}}</p>
+</br>
+
+<p> - Gagnez du temps et calculez en toute simplicité!</p></br>
+</body>
+<div id="conteneur">
+<div id="element">
+<center><p><strong>Calculer vos engagements ISR</strong></p></center></br>
+<p>Vous avez la liste de vos employés, sur un fichier excel, identifiant, date de naissance, date d'embauche et rémunération annuelle</p></br>
+<center>
+
+<form method="POST" action="{% url "entree"%}">
+{% csrf_token %}
+<input type="submit" value="Commencer le calcul Provision ISR" ></center>
+</form>
+</div>
+<div id="element">
+<center><p><strong>Accords spéciaux</strong></p></center></br>
+<p>Vous avez un accord d'entreprise, saisissez le</p></br>
+<center>
+<form method="POST" action="{% url "entree"%}">
+{% csrf_token %}
+<input type="submit" value="Renseigner l'accord" ></center>
+</form>
+</div>
+</div>
+<p>Vous êtes identifié : {{user.username}}, {{name}}</p>
+<p><a href="/logout/">Sortir</a></p>
