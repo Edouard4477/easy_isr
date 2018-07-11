@@ -1,1 +1,2 @@
 web: gunicorn isr.wsgi
+web: gunicorn hello:isr
