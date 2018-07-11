@@ -1,2 +1,1 @@
-web: gunicorn isr.wsgi
-web: gunicorn hello:isr
+web: gunicorn isr.wsgi --log-file -
