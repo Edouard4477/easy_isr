@@ -223,9 +223,9 @@ def isr(date_inv, age_retr, filepath, loi, tech, to):
     #chemin='C:/Users/Saontsy/Desktop/Arrete 31122017/Calcul ISR/'
     Tvie=BASE_DIR+'/calculer/Table_mortalité/CIMAF.txt'
     Tmort=BASE_DIR+'/calculer/Table_mortalité/CIMAH.txt'
-    prop=readlaw(loi)[0]#1er bug
+    prop=2#readlaw(loi)[0]#1er bug
     #taux=0.2#étudier tous les codes du travail et convention collectives
-    gie_deces=1
+    giedeces=1
     to=float(to)
     annee_inv=date_inv[6:10]
     annee_inv=int(annee_inv)
