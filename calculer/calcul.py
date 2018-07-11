@@ -175,12 +175,13 @@ def max(a,b):
     return(c)
 
 def readlaw(loi):
+    loi=str(loi)
     chemin=BASE_DIR+'/calculer/loi/'
     filepath=chemin+loi+'/loi.txt'
     f=open(filepath,"r")
-    li=f.readlines()
     law=[]
     nb_l=0
+    li=f.readlines()
     for i in li:
         r=i.strip("\n")
         v=r.split('\t')
@@ -223,7 +224,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to):
     #chemin='C:/Users/Saontsy/Desktop/Arrete 31122017/Calcul ISR/'
     Tvie=BASE_DIR+'/calculer/Table_mortalité/CIMAF.txt'
     Tmort=BASE_DIR+'/calculer/Table_mortalité/CIMAH.txt'
-    prop=2#readlaw(loi)[0]#1er bug
+    prop=readlaw(loi)[0]#1er bug
     #taux=0.2#étudier tous les codes du travail et convention collectives
     giedeces=1
     to=float(to)
@@ -267,7 +268,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to):
         ly[i][1]=ly[i][1].replace(',','.')
         ly[i][1]=float(ly[i][1])
 
-    wb=open_workbook(filepath)
+    wb=open_workbook(filepath)#second bug
     sh=wb.sheet_by_name(u'Feuil1')
     salarie=[]
     nb_salarie=sh.nrows
