@@ -1,7 +1,7 @@
 Togo - Convention Collective Interprofessionnelle
 proportion	2
 taux_an	0.0
-gie_décès	1
+gie_deces	1
 debut	fin	droit
 0	5	0.35
 6	10	0.40
