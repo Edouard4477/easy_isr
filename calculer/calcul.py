@@ -192,7 +192,7 @@ def readlaw(loi):
     law[3][1]=int(law[3][1])
     prop=law[1][1]
     x = law[2][1]
-    gie_deces=law[3][1]
+    giedeces=law[3][1]
     table=zeros(shape=(nb_l-5,3))
     if law[1][1]==1:
         x=law[2][1]
@@ -203,7 +203,7 @@ def readlaw(loi):
             for j in range(0,3):
                 table[i-5][j]=float(law[i][j])
     
-    return(prop, x, gie_deces,table)
+    return(prop, x, giedeces,table)
 
 def droit(table,x):
     y=0
@@ -223,7 +223,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to):
     #chemin='C:/Users/Saontsy/Desktop/Arrete 31122017/Calcul ISR/'
     Tvie=BASE_DIR+'/calculer/Table_mortalité/CIMAF.txt'
     Tmort=BASE_DIR+'/calculer/Table_mortalité/CIMAH.txt'
-    prop=2#readlaw(loi)[0]#1er bug
+    prop=readlaw(loi)[0]#1er bug
     #taux=0.2#étudier tous les codes du travail et convention collectives
     gie_deces=1
     to=float(to)
@@ -232,18 +232,6 @@ def isr(date_inv, age_retr, filepath, loi, tech, to):
     date_inv=convert(date_inv)
     age_retr=int(age_retr)
     tech=float(tech)
-    wb=open_workbook(filepath)
-    sh=wb.sheet_by_name(u'Feuil1')
-    salarie=[]
-    nb_salarie=sh.nrows
-    for rownum in range(sh.nrows):
-        salarie.append(sh.row_values(rownum))    
-
-    for i in range(1, nb_salarie):
-        salarie[i][0]=int(salarie[i][0])
-        salarie[i][1]=convert_xls(salarie[i][1])
-        salarie[i][2]=convert_xls(salarie[i][2])
-        salarie[i][3]=float(salarie[i][3])
         
     f=open(Tvie,"r")
     li=f.readlines()
@@ -279,6 +267,19 @@ def isr(date_inv, age_retr, filepath, loi, tech, to):
         ly[i][1]=ly[i][1].replace(',','.')
         ly[i][1]=float(ly[i][1])
 
+    wb=open_workbook(filepath)
+    sh=wb.sheet_by_name(u'Feuil1')
+    salarie=[]
+    nb_salarie=sh.nrows
+    for rownum in range(sh.nrows):
+        salarie.append(sh.row_values(rownum))    
+
+    for i in range(1, nb_salarie):
+        salarie[i][0]=int(salarie[i][0])
+        salarie[i][1]=convert_xls(salarie[i][1])
+        salarie[i][2]=convert_xls(salarie[i][2])
+        salarie[i][3]=float(salarie[i][3])
+        
     prov_dc=zeros(shape=(nb_salarie,1))
     prov_lf=zeros(shape=(nb_salarie,1))
 
