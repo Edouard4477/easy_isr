@@ -100,7 +100,6 @@ body
 	font-size: 14px;
 	font-family: Verdana;
 	background-color : white/*#8ED9E8*/;/*#F0F76A;*/
-	/*background-image: url("building2.png");*/
 	margin: 0px 60px 0px 60px;
 }
 
@@ -132,7 +131,6 @@ section
 	margin: 0px 6px 0px 6px;
 	width: 300px;
 	background-color: white;
-	background-image: url("homme_baobab2.png");
 }
 h6
 {
