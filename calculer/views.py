@@ -231,6 +231,7 @@ def entree6(request):
             fic.write('\n')
             fic.write(to)
             fic.close()
+            fic_employes=chemin_result+'/'+Date_inv+'/Liste_salarie1.xlsx'
             prov=isr(Date_inv,age_retr,fic_employes,loi,tech,to)
             r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/resultats.txt','w')
             r.write(str(prov[0]))
