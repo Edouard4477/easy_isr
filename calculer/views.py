@@ -59,7 +59,9 @@ class LogoutView(TemplateView):
 def home(request):
     """ Exemple de page non valide au niveau HTML pour que l'exemple soit concis """
     date=datetime.now()
-    name=request.user
+    name=str(request.user)
+    chemin_result=BASE_DIR+'/temp_result/'+name
+    os.makedirs(chemin_result, mode=0o777, exist_ok=True)
     print(name)
     return render(request, 'index.html',{'date': date,'name': name})
 
