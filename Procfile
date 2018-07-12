@@ -1,1 +1,1 @@
-web: gunicorn isr.wsgi --log-file -
+web: gunicorn isr.wsgi --timeout 120 --keep-alive 5 --log-level debug
