@@ -10,6 +10,7 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from .forms import UploadFileForm
 from .forms import *
+from .models import *
 from django import forms
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -23,6 +24,10 @@ from django.http import JsonResponse
 from django.views.generic import View
 from bokeh.plotting import figure, output_file, show
 from bokeh.embed import components
+from xlwt import easyxf
+import xlrd
+from xlrd import open_workbook
+from xlutils.copy import copy
 # Create your views here.
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -112,12 +117,31 @@ def entree2(request):
         form=donnees_entree2()
     return render(request,'saisie2.html',locals())
 
+def handle_uploaded_file(f,name):
+    with open(BASE_DIR+'/temp_result/'+name+'/salaries.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+def handle_xls(f):
+    with open(BASE_DIR+'/salaries.txt', 'wb+') as destination:
+        wb=open_workbook(f)#second bug
+        sh=wb.sheet_by_name(u'Feuil1')
+        salarie=[]
+        nb_salarie=sh.nrows
+        for rownum in range(sh.nrows):
+            salarie.append(sh.row_values(rownum))
+        for i in range(0, nb_salarie):
+            for j in range(0, 3):
+                destination.write(str(salarie[i][j]))
+
 def entree3(request):
     if request.method=='POST':
-        form=donnees_entree3(request.POST)
+        form=UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            fic_employes=form.cleaned_data['Base_Employes']
             name=str(request.user)
+            handle_uploaded_file(request.FILES['file'], name)
+            #print(form)
+            fic_employes='/temp_result/'+name+'/salaries.txt'
             chemin_result=BASE_DIR+'/temp_result/'+name
             f=open(chemin_result+'/Simulation.txt','r')
             li=f.readlines()
@@ -133,11 +157,19 @@ def entree3(request):
             fic.write(Date_inv+'\n'+age_retr+'\n')
             fic.write(fic_employes)
             fic.close()
-            
             return HttpResponseRedirect('/loi')
+        else:
+          print(form.errors)
     else:
-        form=donnees_entree3()
-    return render(request,'saisie3.html',locals())
+        form=UploadFileForm()
+    #documents=Document.objects.all()
+    #return render_to_response('saisie3.html',
+    #                          {'documents': documents, 'form': form},
+    #                          context_instance=RequestContext(request)
+    #                          )
+    return render(request,'saisie3.html',
+                  {'form': form}
+                  )#locals())
 
 def entree4(request):
     if request.method=='POST':
@@ -233,7 +265,7 @@ def entree6(request):
             fic.write('\n')
             fic.write(to)
             fic.close()
-            fic_employes=chemin_result+'/'+Date_inv+'/Liste_salarie1.xlsx'
+            #fic_employes=chemin_result+'/'+Date_inv+'/Liste_salarie1.xlsx'
             prov=isr(Date_inv,age_retr,fic_employes,loi,tech,to)
             r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/resultats.txt','w')
             r.write(str(prov[0]))

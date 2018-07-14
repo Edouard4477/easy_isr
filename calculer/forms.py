@@ -8,7 +8,9 @@ class donnees_entree2(forms.Form):
     age_retr=forms.CharField(max_length=10)
 
 class donnees_entree3(forms.Form):
-    Base_Employes=forms.CharField(max_length=300)
+    #title = forms.CharField(max_length=50)
+    file = forms.FileField()
+    #Base_Employes=forms.CharField(max_length=300)
 
 choix=('Gabon - Code du travail',
        'Cameroun - Code du travail',
@@ -32,4 +34,5 @@ class donnees_entree6(forms.Form):
     Turnover=forms.CharField(max_length=12)
 
 class UploadFileForm(forms.Form):
-    Base=forms.FileField()
+    title = forms.CharField(max_length=50)
+    file=forms.FileField()

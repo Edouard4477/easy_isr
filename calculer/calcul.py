@@ -148,6 +148,11 @@ def convert_int(val):
     val=int(val)
     return(val)
 
+def convert_float(val):
+    val=val.replace(',','.')
+    val=float(val)
+    return(val)
+
 def nb_year(val):
     val=val.total_seconds()
     val=val/(365.25*24*60*60)
@@ -268,18 +273,33 @@ def isr(date_inv, age_retr, filepath, loi, tech, to):
         ly[i][1]=ly[i][1].replace(',','.')
         ly[i][1]=float(ly[i][1])
 
-    wb=open_workbook(filepath)#second bug
-    sh=wb.sheet_by_name(u'Feuil1')
+    #wb=open_workbook(filepath)#second bug
+    #sh=wb.sheet_by_name(u'Feuil1')
     salarie=[]
-    nb_salarie=sh.nrows
-    for rownum in range(sh.nrows):
-        salarie.append(sh.row_values(rownum))    
+    #nb_salarie=sh.nrows
+    #for rownum in range(sh.nrows):
+    #    salarie.append(sh.row_values(rownum))    
+    nb_salarie=0
+    filepath=BASE_DIR+filepath
+    print(filepath)
+    f=open(filepath,"r")
+    li=f.readlines()
+    for i in li:
+        r=i.strip("\n")
+        v=r.split('\t')
+        nb_salarie=nb_salarie+1
+        salarie.append(v)
 
+    print(nb_salarie)
+    nb_salarie=nb_salarie-1
     for i in range(1, nb_salarie):
         salarie[i][0]=int(salarie[i][0])
-        salarie[i][1]=convert_xls(salarie[i][1])
-        salarie[i][2]=convert_xls(salarie[i][2])
-        salarie[i][3]=float(salarie[i][3])
+        salarie[i][1]=convert(salarie[i][1])
+        salarie[i][2]=convert(salarie[i][2])
+        salarie[i][3]=convert_float(salarie[i][3])
+        #salarie[i][1]=convert_xls(salarie[i][1]) - pour fichier excel
+        #salarie[i][2]=convert_xls(salarie[i][2]) - pour fichier excel
+        #salarie[i][3]=float(salarie[i][3]) - pour fichier excel
         
     prov_dc=zeros(shape=(nb_salarie,1))
     prov_lf=zeros(shape=(nb_salarie,1))

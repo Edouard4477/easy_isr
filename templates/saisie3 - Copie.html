@@ -24,16 +24,11 @@
 <p>Colonne 2 : Date de naissance</p><br>
 <p>Colonne 3 : Date d'embauche</p><br>
 <p>Colonne 4 : Salaire annuel</p><br>
-<form action="{% url "entree3" %}" method="post" enctype="multipart/form-data">
+<form action="{% url "entree3" %}" method="post">
 
     {% csrf_token %}
-	<!--<p>{{form.non_field_errors}}</p>
-	<p>{{form.docfile.label_tag}} {{form.docfile.help_text}}</p>
-	<p>
-		{{form.docfile.errors}}
-		{{form.docfile}}
-	</p>-->
-	{{ form.as_p }}
+
+    {{ form.as_p }}
 
     <br><input type="submit" value="Etape suivante" />
 
