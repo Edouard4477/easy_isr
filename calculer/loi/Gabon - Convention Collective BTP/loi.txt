@@ -1,7 +1,7 @@
 Gabon - Convention Collective BTP
 proportion	2
 taux_an	0.0
-gie_décès	1
+gie_deces	1
 debut	fin	droit
 0	10	0.20
 10	15	0.26
