@@ -34,5 +34,5 @@ class donnees_entree6(forms.Form):
     Turnover=forms.CharField(max_length=12)
 
 class UploadFileForm(forms.Form):
-    title = forms.CharField(max_length=50)
+    #title = forms.CharField(max_length=50)
     file=forms.FileField()

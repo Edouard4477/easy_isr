@@ -1,0 +1,6 @@
+31-12-2018
+57
+/temp_result/compagnie/salaries.txt
+Togo - Convention Collective Interprofessionnelle
+0.025
+0.05
