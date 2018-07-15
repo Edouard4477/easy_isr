@@ -267,117 +267,31 @@ def entree6(request):
             fic.write(to)
             fic.close()
             #fic_employes=chemin_result+'/'+Date_inv+'/Liste_salarie1.xlsx'
-            r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/run.txt','w')
-            r.write('1')
+            prov=isr(Date_inv,age_retr,fic_employes,loi,tech,to)
+            #Code inutile à partir de là
+            r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/resultats.txt','w')
+            r.write(str(prov[0]))
             r.write('\n')
-            r.write('100')
+            r.write(str(prov[1]))
+            r.write('\n')
+            r.write(str(prov[2]))
+            r.write('\n')
+            r.write(str(prov[3]))
+            r.write('\n')
+            r.write(str(prov[4]))
             r.close()
-            return HttpResponseRedirect('/Attente')
+            pyr=prov[5]
+            print(pyr)
+            l=len(pyr)
+            p=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/pyramide.txt','w')
+            for i in range(0,l):
+                p.write(str(pyr[i][1]))
+                p.write('\n')
+            p.close()
+            return HttpResponseRedirect('/Result')
     else:
         form=donnees_entree6()
     return render(request,'saisie6.html',locals())
-
-def attente(request):
-    name=str(request.user)
-    chemin_result=BASE_DIR+'/temp_result/'+name
-    f=open(chemin_result+'/Simulation.txt','r')
-    li=f.readlines()
-    sim=[]
-    nb_contrat=0
-    for i in li:
-        r=i.strip("\n")
-        v=r.split('\t')
-        sim.append(v)
-    Date_inv=sim[0][0]
-    age_retr=sim[1][0]
-    fic_employes=sim[2][0]
-    loi=sim[3][0]
-    tech=sim[4][0]
-    to=sim[5][0]
-    fic_employes=BASE_DIR+fic_employes
-    f=open(fic_employes,'r')
-    li=f.readlines()
-    nb_salarie=0
-    for i in li:
-        r=i.strip('\n')
-        v=r.split('\t')
-        nb_salarie=nb_salarie+1
-
-    nb_salarie=nb_salarie-1
-    f=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/run.txt','r')
-    li=f.readlines()
-    run=[]
-    for i in li:
-        r=i.strip('\n')
-        v=r.split('\t')
-        run.append(v)
-        
-    debut=int(run[0][0])
-    fin=int(run[1][0])
-    if debut==1:
-        prov_vie=0
-        prov_deces=0
-        masse=0
-        nb_employe=0
-        pyr=zeros(shape=(100,1))
-    if debut>1:
-        f=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/resultats.txt','r')
-        li=f.readlines()
-        result=[]
-        for i in li:
-            r=i.strip('\n')
-            v=r.split('\t')
-            result.append(v)
-        prov_vie=float(result[0][0])
-        prov_deces=float(result[1][0])
-        masse=float(result[2][0])
-        nb_employe=int(result[3][0])
-
-        f=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/pyramide.txt','r')
-        li=f.readlines()
-        pyr=[]
-        l=0
-        for i in li:
-            r=i.strip('\n')
-            v=r.split('\t')
-            pyr.append(v)
-            l=l+1
-        for i in range(0, l):
-            pyr[i][0]=float(pyr[i][0])
-            
-        
-    if fin >= nb_salarie:
-        fin=nb_salarie
-        
-    prov=isr(Date_inv,age_retr,fic_employes,loi,tech,to,debut,fin)
-    r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/resultats.txt','w')
-    r.write(str(prov_vie+prov[0]))
-    r.write('\n')
-    r.write(str(prov_deces+prov[1]))
-    r.write('\n')
-    r.write(str(masse+prov[2]))
-    r.write('\n')
-    r.write(str(prov[3]))
-    pyr2=prov[5]
-    print(pyr2)
-    l=len(pyr2)
-    p=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/pyramide.txt','w')
-    for i in range(0,l):
-        p.write(str(pyr[i][0]+pyr2[i][1]))
-        p.write('\n')
-    p.close()
-
-    
-    if fin<nb_salarie:
-        r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/run.txt','w')
-        r.write(str(fin))
-        r.write('\n')
-        r.write(str(fin+100))
-        r.close()
-        return HttpResponseRedirect('/Attente')#render(request, 'attente.html',{'fin':fin})
-
-    if fin==nb_salarie:
-        return HttpResponseRedirect('/Result')
 
 def sortie(request):
     name=str(request.user)
@@ -409,10 +323,10 @@ def sortie(request):
     deces=result[1][0]
     masse=result[2][0]
     effectif=result[3][0]
+    ratio=result[4][0]
     vie=float(vie)
     deces=float(deces)
     masse=float(masse)
-    ratio=vie/masse
     vie_form=affiche(vie)
     deces_form=affiche(deces)
     masse=affiche(masse)
@@ -465,4 +379,5 @@ def sortie(request):
     table=readlaw(loi)[3]
     return render(request, 'result.html',{'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
 
-
+def attente(request):
+    return render(request, 'attente.html')

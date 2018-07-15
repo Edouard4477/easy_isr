@@ -225,7 +225,7 @@ def droit(table,x):
     return(y)
 
 #Calcul ISR
-def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
+def isr(date_inv, age_retr, filepath, loi, tech, to):
     #chemin='C:/Users/Saontsy/Desktop/Arrete 31122017/Calcul ISR/'
     Tvie=BASE_DIR+'/calculer/Table_mortalité/CIMAF.txt'
     Tmort=BASE_DIR+'/calculer/Table_mortalité/CIMAH.txt'
@@ -280,7 +280,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
     #for rownum in range(sh.nrows):
     #    salarie.append(sh.row_values(rownum))    
     nb_salarie=0
-    #filepath=BASE_DIR+filepath - enlevé pour partition du calcul
+    filepath=BASE_DIR+filepath
     print(filepath)
     f=open(filepath,"r")
     li=f.readlines()
@@ -310,7 +310,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
     pyr=zeros(shape=(100,2))
     for i in range(0,100):
         pyr[i][0]=i
-    for i in range(debut, fin):
+    for i in range(1,nb_salarie):
         age=0
         age=annee_inv-salarie[i][1].year
         for j in range(0,100):
@@ -320,7 +320,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
     if prop==1:
         taux=readlaw(loi)[1]
         print(taux)
-        for i in range(debut, fin):
+        for i in range(1,nb_salarie):
             age=0
             age=annee_inv-salarie[i][1].year
             anc=(date_inv-salarie[i][2]).days/365.25
@@ -349,7 +349,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
     if prop==2:
         table=readlaw(loi)[3]
         print(table)
-        for i in range(debut, fin):
+        for i in range(1,nb_salarie):
             age=0
             age=annee_inv-salarie[i][1].year
             anc=(date_inv-salarie[i][2]).days/365.25
@@ -376,7 +376,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
                 anc2=anc+dt2+k/12
                 somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*droit(table,anc2)*exp(anc2*log(1-to))
                         
-    for i in range(debut,fin):
+    for i in range(1,nb_salarie):
         prov_vie=prov_vie+prov_lf[i][0]
         prov_deces=prov_deces+prov_dc[i][0]
         masse=masse+salarie[i][3]
