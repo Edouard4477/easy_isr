@@ -30,4 +30,5 @@ urlpatterns = [
     path('tech/', login_required(views.entree5), name='entree5'),
     path('turnover/', login_required(views.entree6), name='entree6'),
     path('Result/', login_required(views.sortie), name='sortie'),
+    path('Attente/', login_required(views.attente), name='attente'),
 ]

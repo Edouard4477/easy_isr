@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import datetime
 from datetime import datetime
+import time
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -267,6 +268,7 @@ def entree6(request):
             fic.close()
             #fic_employes=chemin_result+'/'+Date_inv+'/Liste_salarie1.xlsx'
             prov=isr(Date_inv,age_retr,fic_employes,loi,tech,to)
+            #Code inutile à partir de là
             r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/resultats.txt','w')
             r.write(str(prov[0]))
             r.write('\n')
@@ -377,3 +379,5 @@ def sortie(request):
     table=readlaw(loi)[3]
     return render(request, 'result.html',{'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
 
+def attente(request):
+    return render(request, 'attente.html')

@@ -1,1 +1,1 @@
-web: gunicorn isr.wsgi --timeout 300
+web: gunicorn isr.wsgi:application --config gunicorn_config.py
