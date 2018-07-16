@@ -19,13 +19,13 @@
 	</nav>
 <br><br>
 <center>
-<h2>Calcul de vos engagements ISR : Saisir le turnover sur un an - nombre de démissions/effectif 7/7</h2><br><br>
-<form action="{% url "entree6" %}" method="post">
+<h2>Calcul de vos engagements ISR : Saisir le taux d'augmentation moyen des salaires 5/7</h2><br><br>
+<form action="{% url "entree52" %}" method="post">
 
     {% csrf_token %}
 
     {{ form.as_p }}
 
-    <br><input type="submit" value="Lancer le calcul" />
+    <br><input type="submit" value="Etape suivante" />
 
 </form>

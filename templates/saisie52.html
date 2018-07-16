@@ -19,12 +19,8 @@
 	</nav>
 <br><br>
 <center>
-<h2>Calcul de vos engagements ISR : Renseigner les informations de vos employés 3/6</h2><br><br>
-<p>Colonne 1 : identifiant</p><br>
-<p>Colonne 2 : Date de naissance</p><br>
-<p>Colonne 3 : Date d'embauche</p><br>
-<p>Colonne 4 : Salaire annuel</p><br>
-<form action="{% url "entree3" %}" method="post">
+<h2>Calcul de vos engagements ISR : Saisir le taux d'augmentation moyen des salaires 5/7</h2><br><br>
+<form action="{% url "entree52" %}" method="post">
 
     {% csrf_token %}
 
@@ -33,4 +29,3 @@
     <br><input type="submit" value="Etape suivante" />
 
 </form>
-</center>

@@ -28,6 +28,7 @@ urlpatterns = [
     path('employes/',login_required(views.entree3), name='entree3'),
     path('loi/',login_required(views.entree4), name='entree4'),
     path('tech/', login_required(views.entree5), name='entree5'),
+    path('inflation/', login_required(views.entree52), name='entree52'),
     path('turnover/', login_required(views.entree6), name='entree6'),
     path('Result/', login_required(views.sortie), name='sortie'),
     path('Attente/', login_required(views.attente), name='attente'),

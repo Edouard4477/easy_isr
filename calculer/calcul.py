@@ -225,7 +225,7 @@ def droit(table,x):
     return(y)
 
 #Calcul ISR
-def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
+def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
     #chemin='C:/Users/Saontsy/Desktop/Arrete 31122017/Calcul ISR/'
     Tvie=BASE_DIR+'/calculer/Table_mortalité/CIMAF.txt'
     Tmort=BASE_DIR+'/calculer/Table_mortalité/CIMAH.txt'
@@ -238,6 +238,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
     date_inv=convert(date_inv)
     age_retr=int(age_retr)
     tech=float(tech)
+    infl=float(infl)
         
     f=open(Tvie,"r")
     li=f.readlines()
@@ -329,7 +330,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
             dt=(depart_retr-date_inv).days/365.25
             dt=max(dt,0)
             age_retr2=max(age_retr,age)
-            prov_lf[i][0]=taux*anc_proj*salarie[i][3]/12*lx[age_retr2+1][1]/lx[age+1][1]
+            prov_lf[i][0]=taux*anc_proj*salarie[i][3]/12*lx[age_retr2+1][1]/lx[age+1][1]*exp((age_retr2-age)*log(1+infl))
             prov_lf[i][0]=prov_lf[i][0]*exp(dt*log(1/(1+tech)))*exp(dt*log(1-to))*anc/anc_proj
             dt2=int(dt)
             for j in range(0,dt2):
@@ -337,7 +338,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
                 somme=0
                 for k in range(1,12):
                     anc2=anc+j+k/12
-                    somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*taux*anc2*exp(anc2*log(1-to))
+                    somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*taux*anc2*exp(anc2*log(1-to))*exp((anc2-anc)*log(1+infl))
                 prov_dc[i][0]=prov_dc[i][0]+facteur*somme
 
             dt3=int((dt-dt2)*12)
@@ -345,7 +346,8 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
             facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12
             for k in range(1,dt3+1):
                 anc2=anc+dt2+k/12
-                somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*taux*anc2*exp(anc2*log(1-to))
+                somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*taux*anc2*exp(anc2*log(1-to))*exp((anc2-anc)*log(1+infl))
+            prov_dc[i][0]=prov_dc[i][0]+facteur*somme
     if prop==2:
         table=readlaw(loi)[3]
         print(table)
@@ -358,7 +360,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
             dt=(depart_retr-date_inv).days/365.25
             dt=max(dt,0)
             age_retr2=max(age_retr,age)
-            prov_lf[i][0]=droit(table,anc_proj)*salarie[i][3]/12*lx[age_retr2+1][1]/lx[age+1][1]
+            prov_lf[i][0]=droit(table,anc_proj)*salarie[i][3]/12*lx[age_retr2+1][1]/lx[age+1][1]*exp((age_retr2-age)*log(1+infl))
             prov_lf[i][0]=prov_lf[i][0]*exp(dt*log(1/(1+tech)))*exp(dt*log(1-to))*anc/anc_proj
             dt2=int(dt)
             for j in range(0,dt2):
@@ -366,7 +368,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
                 somme=0
                 for k in range(1,12):
                     anc2=anc+j+k/12
-                    somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*droit(table,anc2)*exp(anc2*log(1-to))
+                    somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*droit(table,anc2)*exp(anc2*log(1-to))*exp((anc2-anc)*log(1+infl))
                 prov_dc[i][0]=prov_dc[i][0]+facteur*somme
 
             dt3=int((dt-dt2)*12)
@@ -374,7 +376,8 @@ def isr(date_inv, age_retr, filepath, loi, tech, to, debut, fin):
             facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12
             for k in range(1,dt3+1):
                 anc2=anc+dt2+k/12
-                somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*droit(table,anc2)*exp(anc2*log(1-to))
+                somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*droit(table,anc2)*exp(anc2*log(1-to))*exp((anc2-anc)*log(1+infl))
+            prov_dc[i][0]=prov_dc[i][0]+facteur*somme
                         
     for i in range(debut,fin):
         prov_vie=prov_vie+prov_lf[i][0]

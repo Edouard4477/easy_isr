@@ -3,4 +3,5 @@
 /temp_result/compagnie/salaries.txt
 Togo - Convention Collective Interprofessionnelle
 0.025
+0.02
 0.05

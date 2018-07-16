@@ -230,10 +230,46 @@ def entree5(request):
             fic.write(tech)
             fic.close()
             
-            return HttpResponseRedirect('/turnover')
+            return HttpResponseRedirect('/inflation')
     else:
         form=donnees_entree5()
     return render(request,'saisie5.html',locals())
+
+def entree52(request):
+    if request.method=='POST':
+        form=donnees_entree52(request.POST)
+        if form.is_valid():
+            infl=form.cleaned_data['Inflation']
+            name=str(request.user)
+            chemin_result=BASE_DIR+'/temp_result/'+name
+            f=open(chemin_result+'/Simulation.txt','r')
+            li=f.readlines()
+            sim=[]
+            nb_contrat=0
+            for i in li:
+                r=i.strip("\n")
+                v=r.split('\t')
+                sim.append(v)
+            Date_inv=sim[0][0]
+            age_retr=sim[1][0]
+            fic_employes=sim[2][0]
+            loi=sim[3][0]
+            tech=sim[4][0]
+            fic=open(chemin_result+'/'+'Simulation'+'.txt','w')
+            fic.write(Date_inv+'\n'+age_retr+'\n')
+            fic.write(fic_employes)
+            fic.write('\n')
+            fic.write(loi)
+            fic.write('\n')
+            fic.write(tech)
+            fic.write('\n')
+            fic.write(infl)
+            fic.close()
+            
+            return HttpResponseRedirect('/turnover')
+    else:
+        form=donnees_entree52()
+    return render(request,'saisie52.html',locals())
 
 def entree6(request):
     if request.method=='POST':
@@ -255,6 +291,7 @@ def entree6(request):
             fic_employes=sim[2][0]
             loi=sim[3][0]
             tech=sim[4][0]
+            infl=sim[5][0]
             os.makedirs(chemin_result+'/'+Date_inv+'/'+tech+'/'+to, mode=0o777, exist_ok=True)
             fic=open(chemin_result+'/'+'Simulation'+'.txt','w')
             fic.write(Date_inv+'\n'+age_retr+'\n')
@@ -263,6 +300,8 @@ def entree6(request):
             fic.write(loi)
             fic.write('\n')
             fic.write(tech)
+            fic.write('\n')
+            fic.write(infl)
             fic.write('\n')
             fic.write(to)
             fic.close()
@@ -293,7 +332,8 @@ def attente(request):
     fic_employes=sim[2][0]
     loi=sim[3][0]
     tech=sim[4][0]
-    to=sim[5][0]
+    infl=sim[5][0]
+    to=sim[6][0]
     fic_employes=BASE_DIR+fic_employes
     f=open(fic_employes,'r')
     li=f.readlines()
@@ -349,7 +389,7 @@ def attente(request):
     if fin >= nb_salarie:
         fin=nb_salarie
         
-    prov=isr(Date_inv,age_retr,fic_employes,loi,tech,to,debut,fin)
+    prov=isr(Date_inv,age_retr,fic_employes,loi,tech,infl,to,debut,fin)
     r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/resultats.txt','w')
     r.write(str(prov_vie+prov[0]))
     r.write('\n')
@@ -395,7 +435,8 @@ def sortie(request):
     fic_employes=sim[2][0]
     loi=sim[3][0]
     tech=sim[4][0]
-    to=sim[5][0]
+    infl=sim[5][0]
+    to=sim[6][0]
     chemin_result=chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/'
     #os.startfile(chemin_result+'TFA.txt')
     f=open(chemin_result+'resultats.txt')
@@ -454,6 +495,9 @@ def sortie(request):
     to = float(to)
     to=to*100
     to=str(to)+'%'
+    infl=float(infl)
+    infl=infl*100
+    infl=str(infl)+'%'
     ratio=float(ratio)
     ratio=ratio*10000
     ratio=int(ratio)
@@ -464,6 +508,6 @@ def sortie(request):
     taux=int(taux*100)
     taux=str(taux)+'%'
     table=readlaw(loi)[3]
-    return render(request, 'result.html',{'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
+    return render(request, 'result.html',{'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'infl':infl,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
 
 

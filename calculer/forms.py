@@ -30,6 +30,9 @@ class donnees_entree4(forms.Form):
 class donnees_entree5(forms.Form):
     Taux_technique=forms.CharField(max_length=12)
 
+class donnees_entree52(forms.Form):
+    Inflation=forms.CharField(max_length=12)
+
 class donnees_entree6(forms.Form):
     Turnover=forms.CharField(max_length=12)
 
