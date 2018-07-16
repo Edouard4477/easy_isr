@@ -4,6 +4,7 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="{% static 'css/Styleact.css'%}">
 	<title>Assistance Actuarielle</title>
+	<META HTTP-EQUIV="Refresh" CONTENT="0.1; URL="{%url "attente"%}"">
 	</head>
 	<header>
 	<center>
@@ -21,6 +22,8 @@
 <center>
 <h2>Patientez un peu pour les résultats</h2><br><br>
 
-<p>Avancement : </p>
+<p>Avancement : {{ratio}} %</p> </br></br>
+
+<marquee><FONT color="red">Veuillez patientez, ne toucher à rien, les résultats seront disponible sous peu !</FONT></marquee>
 
 </form>

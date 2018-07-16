@@ -374,7 +374,8 @@ def attente(request):
         r.write('\n')
         r.write(str(fin+100))
         r.close()
-        return HttpResponseRedirect('/Attente')#render(request, 'attente.html',{'fin':fin})
+        ratio=int(fin/nb_salarie*100)
+        return render(request, 'attente.html',{'ratio':ratio})#HttpResponseRedirect('/Attente')#render(request, 'attente.html',{'fin':fin})
 
     if fin==nb_salarie:
         return HttpResponseRedirect('/Result')
