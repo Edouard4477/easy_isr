@@ -334,19 +334,19 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
             prov_lf[i][0]=prov_lf[i][0]*exp(dt*log(1/(1+tech)))*exp(dt*log(1-to))*anc/anc_proj
             dt2=int(dt)
             for j in range(0,dt2):
-                facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12
+                facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12*exp((j)*log(1+infl))
                 somme=0
                 for k in range(1,12):
                     anc2=anc+j+k/12
-                    somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*taux*anc2*exp(anc2*log(1-to))*exp((anc2-anc)*log(1+infl))
+                    somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*taux*anc2*exp((anc2-anc)*log(1-to))
                 prov_dc[i][0]=prov_dc[i][0]+facteur*somme
 
             dt3=int((dt-dt2)*12)
             somme = 0
-            facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12
+            facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12*exp((dt2)*log(1+infl))
             for k in range(1,dt3+1):
                 anc2=anc+dt2+k/12
-                somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*taux*anc2*exp(anc2*log(1-to))*exp((anc2-anc)*log(1+infl))
+                somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*taux*anc2*exp((anc2-anc)*log(1-to))
             prov_dc[i][0]=prov_dc[i][0]+facteur*somme
     if prop==2:
         table=readlaw(loi)[3]
@@ -364,19 +364,19 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
             prov_lf[i][0]=prov_lf[i][0]*exp(dt*log(1/(1+tech)))*exp(dt*log(1-to))*anc/anc_proj
             dt2=int(dt)
             for j in range(0,dt2):
-                facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12
+                facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12*exp((j)*log(1+infl))
                 somme=0
                 for k in range(1,12):
                     anc2=anc+j+k/12
-                    somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*droit(table,anc2)*exp(anc2*log(1-to))*exp((anc2-anc)*log(1+infl))
+                    somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*droit(table,anc2)*exp((anc2-anc)*log(1-to))
                 prov_dc[i][0]=prov_dc[i][0]+facteur*somme
 
             dt3=int((dt-dt2)*12)
             somme = 0
-            facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12
+            facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12*exp((dt2)*log(1+infl))
             for k in range(1,dt3+1):
                 anc2=anc+dt2+k/12
-                somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*droit(table,anc2)*exp(anc2*log(1-to))*exp((anc2-anc)*log(1+infl))
+                somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*droit(table,anc2)*exp((anc2-anc)*log(1-to))
             prov_dc[i][0]=prov_dc[i][0]+facteur*somme
                         
     for i in range(debut,fin):
