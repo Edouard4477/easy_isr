@@ -1,4 +1,4 @@
-Gabon - Convention Collective BTP
+Gabon - Convention Collective Banque
 proportion	2
 taux_an	0.0
 gie_deces	1
