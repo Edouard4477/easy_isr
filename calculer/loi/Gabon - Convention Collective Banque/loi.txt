@@ -2,6 +2,8 @@ Gabon - Convention Collective Banque
 proportion	2
 taux_an	0.0
 gie_deces	1
+mini	0
+maxi	720
 debut	fin	droit
 0	5	0.20
 6	10	0.30

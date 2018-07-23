@@ -507,7 +507,7 @@ def sortie(request):
     taux=readlaw(loi)[1]
     taux=int(taux*100)
     taux=str(taux)+'%'
-    table=readlaw(loi)[3]
+    table=readlaw(loi)[5]
     return render(request, 'result.html',{'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'infl':infl,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
 
 

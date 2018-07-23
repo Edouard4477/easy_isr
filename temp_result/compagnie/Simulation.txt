@@ -1,7 +1,7 @@
 31-12-2018
 57
 /temp_result/compagnie/salaries.txt
-Senegal - Convention Collective Interprofessionnelle
-0.035
+Togo - Convention Collective Interprofessionnelle
+0.025
 0
 0.05
