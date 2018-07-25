@@ -1,11 +1,11 @@
-Senegal - Convention Collective Interprofessionnelle
+Cote d Ivoire - Convention Collective Interprofessionnelle
 proportion	2
 taux_an	0.0
 gie_deces	1
 mini	0
-maxi	720
+maxi	25
 Mtmaxi	999999999999
 debut	fin	droit
-0	5	0.25
-6	10	0.30
+0	5	0.30
+6	10	0.35
 11	100	0.40

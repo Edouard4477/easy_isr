@@ -20,6 +20,39 @@
 </br><h2>Evaluation actuarielle de vos engagements ISR au : {{Date_inv}}</h2></br></br>
 <p>Vos engagements en cas de vie sont de : <strong>{{vie_form}}</strong> FCFA</br></br>
 <p>Vos engagements en cas de décès sont de : <strong>{{deces_form}}</strong> FCFA</p></br></br>
+<p>Voici la duration de vos engagements :</p></br>
+<script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.13.0.min.js"></script>
+	{{div2|safe}}
+	{{ script2 | safe}}
+	</br>
+{% block content %}
+<table align="center">
+<tr>
+<td><strong>Duration(années)</strong></td>
+<td><strong>0</strong></td>
+<td><strong>1</strong></td>
+<td><strong>2</strong></td>
+<td><strong>3</strong></td>
+<td><strong>4</strong></td>
+<td><strong>5</strong></td>
+<td><strong>6</strong></td>
+<td><strong>7</strong></td>
+<td><strong>8</strong></td>
+<td><strong>9</strong></td>
+<td><strong>10 et +</strong></td>
+</tr>
+<td>En cas de vie</td>
+{% for i in dur_vie_tab %}
+	<td>{{i}}</td>
+{% endfor %}
+</tr>
+<td>En cas de décès</td>
+{% for i in dur_deces_tab %}
+	<td>{{i}}</td>
+{% endfor %}
+</tr>
+</table>
+<p>*Montants en milliers de FCFA</p></br></br>
 <p>Pour rappel, vous avez au {{Date_inv}}, <strong>{{effectif}}</strong> salariés pour une masse salariale totale de <strong>{{masse}}</strong> FCFA.</p></br></br>
 <p>Votre provision "Indémnités Services Rendus" pèse <strong>{{ratio}}</strong> de la masse salariale annuelle.</p></br>
 <p>La moyenne d'âge de vos salariés est de <strong>{{age_moy}}</strong> ans, dont voici la répartition :</p></br>
@@ -29,7 +62,7 @@
 	</br>
 <p>Le calcul a été réalisé selon les conditions d'indémnisation prévu selon : <strong>{{loi}}</strong></br></p></br>
 <p>Les conditions de calcul de l'indémnités service rendu est le suivant, à appliquer sur le salaire mensuel moyen des 12 derniers mois : </p></br>
-{% block content %}
+
 {% if prop == 1 %}
 	<p>Le taux de {{taux}} du traitement mensuel par année de service</p></br>
 {% endif %}

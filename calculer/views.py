@@ -309,7 +309,7 @@ def entree6(request):
             r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/run.txt','w')
             r.write('1')
             r.write('\n')
-            r.write('100')
+            r.write('100')#modifier pas
             r.close()
             return HttpResponseRedirect('/Attente')
     else:
@@ -360,6 +360,7 @@ def attente(request):
         masse=0
         nb_employe=0
         pyr=zeros(shape=(100,1))
+        dur=zeros(shape=(50,2))
     if debut>1:
         f=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/resultats.txt','r')
         li=f.readlines()
@@ -384,6 +385,19 @@ def attente(request):
             l=l+1
         for i in range(0, l):
             pyr[i][0]=float(pyr[i][0])
+
+        f=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/duration.txt','r')
+        li=f.readlines()
+        dur=[]
+        lo=0
+        for i in li:
+          r=i.strip('\n')
+          v=r.split('\t')
+          dur.append(v)
+          lo=lo+1
+        for i in range(0, lo):
+          dur[i][0]=float(dur[i][0])
+          dur[i][1]=float(dur[i][1])
             
         
     if fin >= nb_salarie:
@@ -407,12 +421,20 @@ def attente(request):
         p.write('\n')
     p.close()
 
-    
+    p=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/duration.txt','w')
+    duration=prov[6]
+    for i in range(0,50):
+      p.write(str(dur[i][0]+duration[i][0]))
+      p.write('\t')
+      p.write(str(dur[i][1]+duration[i][1]))
+      if i<49:
+        p.write('\n')
+    p.close()
     if fin<nb_salarie:
         r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/run.txt','w')
         r.write(str(fin))
         r.write('\n')
-        r.write(str(fin+100))
+        r.write(str(fin+100))#100 - modifier pas
         r.close()
         ratio=int(fin/nb_salarie*100)
         return render(request, 'attente.html',{'ratio':ratio})#HttpResponseRedirect('/Attente')#render(request, 'attente.html',{'fin':fin})
@@ -462,6 +484,55 @@ def sortie(request):
     for i in range(0,100):
         pyr_age[0][i]=i
     x=pyr_age[0]
+    f=open(chemin_result+'duration.txt')
+    li=f.readlines()
+    dur=[]
+    nb_li=0
+    for i in li:
+      r=i.strip('\n')
+      v=r.split('\t')
+      dur.append(v)
+      nb_li=nb_li+1
+    dur_vie=zeros(shape=(50,1))
+    dur_deces=zeros(shape=(50,1))
+    for i in range(0,nb_li):
+      dur_vie[i][0]=float(dur[i][0])
+      dur_deces[i][0]=float(dur[i][1])
+
+    dur_vie_ta=zeros(shape=(11,1))
+    dur_deces_ta=zeros(shape=(11,1))
+    for i in range(0,11):
+      if i<10:
+        dur_vie_ta[i][0]=dur_vie[i][0]
+        dur_deces_ta[i][0]=dur_deces[i][0]
+      if i==10:
+        for j in range(10,50):
+          dur_vie_ta[i][0]=dur_vie_ta[i][0]+dur_vie[j][0]
+          dur_deces_ta[i][0]=dur_deces_ta[i][0]+dur_deces[j][0]
+    dur_vie_tab=[]
+    dur_deces_tab=[]
+    for i in range(0,11):
+      dur_vie_tab.append(affiche(dur_vie_ta[i][0]/1000))
+      dur_deces_tab.append(affiche(dur_deces_ta[i][0]/1000))
+    xa=zeros(shape=(1,50))
+    cumul_vie=zeros(shape=(1,50))
+    cumul_deces=zeros(shape=(1,50))
+    for i in range(0,50):
+      xa[0][i]=i
+      for j in range(0,i+1):
+        cumul_vie[0][i]=cumul_vie[0][i]+dur_vie[j][0]
+        cumul_deces[0][i]=cumul_deces[0][1]+dur_deces[j][0]
+    
+    title2='Duration'
+    plot2=figure(title=title2,
+                x_axis_label='Année',
+                y_axis_label='Cumul des engagements',
+                plot_width=1200,
+                plot_height=400)
+    plot2.line(xa[0], cumul_vie[0], color="green", legend="en cas de vie")
+    plot2.line(xa[0], cumul_deces[0], color="#feb24c", legend="en cas de décès")
+    script2, div2=components(plot2)
+    
     f=open(chemin_result+'pyramide.txt')
     li=f.readlines()
     pyr=[]
@@ -507,7 +578,10 @@ def sortie(request):
     taux=readlaw(loi)[1]
     taux=int(taux*100)
     taux=str(taux)+'%'
-    table=readlaw(loi)[5]
-    return render(request, 'result.html',{'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'infl':infl,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
+    table=readlaw(loi)[6]
+    print(dur)
+    print(dur_vie)
+    print(dur_vie_tab)
+    return render(request, 'result.html',{'script2':script2,'div2':div2,'dur_vie_tab':dur_vie_tab,'dur_deces_tab':dur_deces_tab,'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'infl':infl,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
 
 

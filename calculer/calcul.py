@@ -201,17 +201,18 @@ def readlaw(loi):
     giedeces=law[3][1]
     mini=int(law[4][1])
     maxi=int(law[5][1])
-    table=zeros(shape=(nb_l-7,3))
+    mt_maxi=int(law[6][1])
+    table=zeros(shape=(nb_l-8,3))
     if law[1][1]==1:
         x=law[2][1]
 
     if law[1][1]==2:
         x=0.0
-        for i in range(7,nb_l):
+        for i in range(8,nb_l):
             for j in range(0,3):
-                table[i-7][j]=float(law[i][j])
+                table[i-8][j]=float(law[i][j])
     
-    return(prop, x, giedeces,mini,maxi,table)
+    return(prop, x, giedeces,mini,maxi,mt_maxi,table)
 
 def droit(table,x):
     y=0
@@ -243,6 +244,8 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
     infl=float(infl)
     mini=readlaw(loi)[3]
     maxi=readlaw(loi)[4]
+    mt_maxi=readlaw(loi)[5]
+    duration=zeros(shape=(50,2))
         
     f=open(Tvie,"r")
     li=f.readlines()
@@ -353,7 +356,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
                 somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*taux*anc2*exp((anc2-anc)*log(1-to))*anc/anc2
             prov_dc[i][0]=prov_dc[i][0]+facteur*somme
     if prop==2:
-        table=readlaw(loi)[5]
+        table=readlaw(loi)[6]
         print(table)
         for i in range(debut, fin):
             age=0
@@ -365,32 +368,35 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
             dt=max(dt,0)
             age_retr2=max(age_retr,age)
             if anc_proj>mini:
-                prov_lf[i][0]=min(droit(table,anc_proj),maxi)*salarie[i][3]/12*lx[age_retr2+1][1]/lx[age+1][1]*exp((age_retr2-age)*log(1+infl))
+                prov_lf[i][0]=min(min(droit(table,anc_proj),maxi)*salarie[i][3]/12,mt_maxi)*lx[age_retr2+1][1]/lx[age+1][1]*exp((age_retr2-age)*log(1+infl))
                 prov_lf[i][0]=prov_lf[i][0]*exp(dt*log(1/(1+tech)))*exp(dt*log(1-to))*anc/anc_proj
 
             if anc_proj<=mini:
                 prov_lf[i][0]=0
+            duration[age_retr2-age][0]=duration[age_retr2-age][0]+prov_lf[i][0]
             dt2=int(dt)
             for j in range(0,dt2):
-                facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12*exp((j)*log(1+infl))
+                facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*exp((j)*log(1+infl))
                 somme=0
                 for k in range(1,12):
                     anc2=anc+j+k/12
                     if anc2>mini:
-                        somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*min(droit(table,anc2),maxi)*exp((anc2-anc)*log(1-to))*anc/anc2
-                    if anc2<mini:
+                        somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*min(min(droit(table,anc2),maxi)*salarie[i][3]/12,mt_maxi)*exp((anc2-anc)*log(1-to))*anc/anc2
+                    if anc2<=mini:
                         somme=somme+0
+                duration[j][1]=duration[j][1]+facteur*somme
                 prov_dc[i][0]=prov_dc[i][0]+facteur*somme
 
             dt3=int((dt-dt2)*12)
             somme = 0
-            facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*salarie[i][3]/12*exp((dt2)*log(1+infl))
+            facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*exp((dt2)*log(1+infl))
             for k in range(1,dt3+1):
                 anc2=anc+dt2+k/12
                 if anc2>mini:
-                    somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*min(droit(table,anc2),maxi)*exp((anc2-anc)*log(1-to))*anc/anc2
+                    somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*min(min(droit(table,anc2),maxi)*salarie[i][3]/12,mt_maxi)*exp((anc2-anc)*log(1-to))*anc/anc2
                 if anc2<=mini:
                     somme=somme+0
+            duration[dt2][1]=duration[dt2][1]+facteur*somme
             prov_dc[i][0]=prov_dc[i][0]+facteur*somme
                         
     for i in range(debut,fin):
@@ -399,6 +405,6 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
         masse=masse+salarie[i][3]
 
     ratio=prov_vie/masse
-    return(prov_vie,prov_deces,masse, nb_salarie, ratio, pyr)
+    return(prov_vie,prov_deces,masse, nb_salarie, ratio, pyr, duration)
 
 
