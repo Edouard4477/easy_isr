@@ -2,7 +2,7 @@ Mali - Code du travail
 proportion	2
 taux_an	0.0
 gie_deces	1
-mini	12
+mini	1
 maxi	720
 Mtmaxi	999999999999
 debut	fin	droit
