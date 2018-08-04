@@ -81,6 +81,40 @@
 	{% endfor %}
 	</table>
 {% endif %}
+{% if prop == 3 %}
+	<table align="center">
+	<tr>
+	<td><strong>Tranche ancienneté - debut</strong></td>
+	<td><strong>Tranche ancienneté - fin</strong></td>
+	<td><strong>Droit acquis par année de présence en part du salaire de référence</strong></td>
+	{% for i in table %}
+		<tr>
+		{% for j in i %}
+			<td>{{j}}</td>
+		{% endfor %}
+		</tr>
+	{% endfor %}
+	</table>
+	</br>
+	<p>Un abondement est versé en cas de décès :</p>
+	<p> - {{abdc1}} mois de salaire acquis par année de travail.</p>
+	<p> - Cet abondement ne pourra dépasser {{abdc2}} mois de salaire.</p></br>
+	<p>En fonction de l'âge et l'ancienneté au moment du départ en retraite, le coefficient lu dans le tableau suivant s'applique au montant calculé :</p>
+	<table align="center">
+	<tr>
+	<td><strong>Age au départ à la retraite</strong>
+	<td colspan=4><strong>Ancienneté inférieur à</strong></td>
+	</tr>
+	{% for i in table2 %}
+		<tr>
+		{% for j in i %}
+			<td>{{j}}</td>
+		{% endfor %}
+		</tr>
+	{% endfor %}
+	</br>
+	</table>
+{% endif %}
 {% endblock %}
 </br>
 <p>Pour ce calcul, vous avez fait l'hypothèse d'une augmentation moyenne des salaires de : <strong>{{infl}}</strong> par an.</p></br>

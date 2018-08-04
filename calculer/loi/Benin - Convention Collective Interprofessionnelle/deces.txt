@@ -1,0 +1,3 @@
+abondement_deces
+nb_mois_an	1.0
+nb_mois_maxi	6.0

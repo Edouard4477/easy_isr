@@ -521,7 +521,7 @@ def sortie(request):
       xa[0][i]=i
       for j in range(0,i+1):
         cumul_vie[0][i]=cumul_vie[0][i]+dur_vie[j][0]
-        cumul_deces[0][i]=cumul_deces[0][1]+dur_deces[j][0]
+        cumul_deces[0][i]=cumul_deces[0][i]+dur_deces[j][0]
     
     title2='Duration'
     plot2=figure(title=title2,
@@ -556,8 +556,8 @@ def sortie(request):
     age_moy=int(age_moy*100)/100
     title='Pyramide des âges - Salariés'
     plot=figure(title=title,
-                x_axis_label='Age',
-                y_axis_label='Nombre',
+                x_axis_label='Nombre',
+                y_axis_label='Age',
                 plot_width=1200,
                 plot_height=400)
     
@@ -578,10 +578,18 @@ def sortie(request):
     taux=readlaw(loi)[1]
     taux=int(taux*100)
     taux=str(taux)+'%'
-    table=readlaw(loi)[6]
+    table=readlaw(loi)[7]
+    table2=[]
+    abdc1=0
+    abdc2=0
+    print(prop+1)
+    if prop==3:
+      table2=retire(loi)
+      abdc1=str(abondeces(loi)[0])
+      abdc2=str(abondeces(loi)[1])
     print(dur)
     print(dur_vie)
     print(dur_vie_tab)
-    return render(request, 'result.html',{'script2':script2,'div2':div2,'dur_vie_tab':dur_vie_tab,'dur_deces_tab':dur_deces_tab,'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'infl':infl,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
+    return render(request, 'result.html',{'abdc1':abdc1,'abdc2':abdc2,'table2':table2,'script2':script2,'div2':div2,'dur_vie_tab':dur_vie_tab,'dur_deces_tab':dur_deces_tab,'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'infl':infl,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
 
 

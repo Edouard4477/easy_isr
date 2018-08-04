@@ -17,6 +17,7 @@ class donnees_entree3(forms.Form):
 
 class donnees_entree4(forms.Form):
     list_choix=os.listdir(BASE_DIR+'/calculer/loi')
+    list_choix.sort()
     choix=[]
     nb_choix=0
     for i in list_choix:
