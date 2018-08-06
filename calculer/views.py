@@ -598,7 +598,7 @@ def sortie(request):
       if loi[i:i+1]=='-':
         top=1
     print(table)
-    loi_mimi=loi
+    loi_mini=loi
     loi3=loi2+' Convention Collective Interprofessionnelle'
     loi2=loi2+' Code du travail'
     print(loi2)
@@ -614,7 +614,7 @@ def sortie(request):
       if i>0:
         table[i][0]=table[i][0]-1
 
-    if table_min!=table:
+    if loi_mini!=loi:
       l=len(table_min)
       for i in range(0,l):
         if i>0:

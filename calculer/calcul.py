@@ -387,7 +387,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
             if loi[i:i+1]=='-':
                 top=1
         print(table)
-        loi_mimi=loi
+        loi_mini=loi
         loi3=loi2+' Convention Collective Interprofessionnelle'
         loi2=loi2+' Code du travail'
         print(loi2)
