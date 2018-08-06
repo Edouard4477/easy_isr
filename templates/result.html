@@ -79,7 +79,24 @@
 		{% endfor %}
 		</tr>
 	{% endfor %}
-	</table>
+	</table></br>
+	{% if loi != loi_mini %}
+		<p>Egalement, l'indémnité calculée selon la convention collective doit être supérieure à celle calculée selon : {{loi_mini}}</p></br>
+			<table align="center">
+			<tr>
+			<td><strong>Tranche ancienneté - debut</strong></td>
+			<td><strong>Tranche ancienneté - fin</strong></td>
+			<td><strong>Droit acquis par année de présence en part du salaire de référence</strong></td>
+			{% for i in table_min %}
+				<tr>
+				{% for j in i %}
+					<td>{{j}}</td>
+				{% endfor %}
+				</tr>
+			{% endfor %}
+			</table></br>
+		<p>Nous retiendrons alors le maximum des deux calculs, dans nos projections.</p>
+	{% endif %}
 {% endif %}
 {% if prop == 3 %}
 	<table align="center">

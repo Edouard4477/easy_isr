@@ -590,6 +590,25 @@ def sortie(request):
     print(dur)
     print(dur_vie)
     print(dur_vie_tab)
-    return render(request, 'result.html',{'abdc1':abdc1,'abdc2':abdc2,'table2':table2,'script2':script2,'div2':div2,'dur_vie_tab':dur_vie_tab,'dur_deces_tab':dur_deces_tab,'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'infl':infl,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
+    loi2=''
+    top=0
+    for i in range(0,300):
+      if top==0:
+        loi2=loi2+loi[i:i+1]
+      if loi[i:i+1]=='-':
+        top=1
+    print(table)
+    loi_mimi=loi
+    loi3=loi2+' Convention Collective Interprofessionnelle'
+    loi2=loi2+' Code du travail'
+    print(loi2)
+    print(loi3)
+    if os.path.isdir(BASE_DIR+'/calculer/loi/'+loi2+'/')==True:
+      loi_mini=loi2
+    if os.path.isdir(BASE_DIR+'/calculer/loi/'+loi3+'/')==True:
+      loi_mini=loi3
+    print(loi_mini)
+    table_min=readlaw(loi_mini)[7]
+    return render(request, 'result.html',{'loi_mini':loi_mini,'table_min':table_min,'abdc1':abdc1,'abdc2':abdc2,'table2':table2,'script2':script2,'div2':div2,'dur_vie_tab':dur_vie_tab,'dur_deces_tab':dur_deces_tab,'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'infl':infl,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
 
 

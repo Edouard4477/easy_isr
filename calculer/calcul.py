@@ -379,7 +379,25 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
     
     if prop==2:
         table=readlaw(loi)[7]
+        loi2=''
+        top=0
+        for i in range(0,300):
+            if top==0:
+                loi2=loi2+loi[i:i+1]
+            if loi[i:i+1]=='-':
+                top=1
         print(table)
+        loi_mimi=loi
+        loi3=loi2+' Convention Collective Interprofessionnelle'
+        loi2=loi2+' Code du travail'
+        print(loi2)
+        print(loi3)
+        if os.path.isdir(BASE_DIR+'/calculer/loi/'+loi2+'/')==True:
+            loi_mini=loi2
+        if os.path.isdir(BASE_DIR+'/calculer/loi/'+loi3+'/')==True:
+            loi_mini=loi3
+        print(loi_mini)
+        table_min=readlaw(loi_mini)[7]
         for i in range(debut, fin):
             age=0
             age=annee_inv-salarie[i][1].year
@@ -390,7 +408,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
             dt=max(dt,0)
             age_retr2=max(age_retr,age)
             if anc_proj>mini:
-                prov_lf[i][0]=min(max(mt_mini,min(droit(table,anc_proj),maxi))*salarie[i][3]/12,mt_maxi)*lx[age_retr2+1][1]/lx[age+1][1]*exp((age_retr2-age)*log(1+infl))
+                prov_lf[i][0]=min(max(mt_mini,min(max(droit(table_min,anc_proj),droit(table,anc_proj)),maxi))*salarie[i][3]/12,mt_maxi)*lx[age_retr2+1][1]/lx[age+1][1]*exp((age_retr2-age)*log(1+infl))
                 prov_lf[i][0]=prov_lf[i][0]*exp(dt*log(1/(1+tech)))*exp(dt*log(1-to))*anc/anc_proj
 
             if anc_proj<=mini:
@@ -403,7 +421,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
                 for k in range(1,12):
                     anc2=anc+j+k/12
                     if anc2>mini:
-                        somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*min(max(mt_mini,min(droit(table,anc2),maxi))*salarie[i][3]/12,mt_maxi)*exp((anc2-anc)*log(1-to))*anc/anc2
+                        somme=somme+1/12*exp((j+k/12)*log(1/(1+tech)))*min(max(mt_mini,min(max(droit(table_min,anc2),droit(table,anc2)),maxi))*salarie[i][3]/12,mt_maxi)*exp((anc2-anc)*log(1-to))*anc/anc2
                     if anc2<=mini:
                         somme=somme+0
                 duration[j][1]=duration[j][1]+facteur*somme
@@ -415,7 +433,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
             for k in range(1,dt3+1):
                 anc2=anc+dt2+k/12
                 if anc2>mini:
-                    somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*min(min(droit(table,anc2),maxi)*salarie[i][3]/12,mt_maxi)*exp((anc2-anc)*log(1-to))*anc/anc2
+                    somme=somme+1/12*exp((dt2+k/12)*log(1/(1+tech)))*min(min(max(droit(table_min,anc2),droit(table,anc2)),maxi)*salarie[i][3]/12,mt_maxi)*exp((anc2-anc)*log(1-to))*anc/anc2
                 if anc2<=mini:
                     somme=somme+0
             duration[dt2][1]=duration[dt2][1]+facteur*somme
