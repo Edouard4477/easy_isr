@@ -609,6 +609,15 @@ def sortie(request):
       loi_mini=loi3
     print(loi_mini)
     table_min=readlaw(loi_mini)[7]
+    l=len(table)
+    for i in range(0,l):
+      if i>0:
+        table[i][0]=table[i][0]-1
+
+    l=len(table_min)
+    for i in range(0,l):
+      if i>0:
+        table[i][0]=table[i][0]-1
     return render(request, 'result.html',{'loi_mini':loi_mini,'table_min':table_min,'abdc1':abdc1,'abdc2':abdc2,'table2':table2,'script2':script2,'div2':div2,'dur_vie_tab':dur_vie_tab,'dur_deces_tab':dur_deces_tab,'prop':prop,'taux':taux,'table':table,'age_moy':age_moy,'infl':infl,'script':script,'div':div,'vie_form':vie_form,'deces_form':deces_form, 'ratio':ratio, 'Date_inv':Date_inv, 'loi':loi, 'tech':tech, 'to':to, 'masse':masse, 'effectif':effectif})
 
 
