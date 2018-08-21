@@ -429,7 +429,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
 
             dt3=int((dt-dt2)*12)
             somme = 0
-            facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*exp((dt2)*log(1+infl))
+            facteur=(ly[age+dt2+1][1]-ly[age+dt2+2][1])/ly[age+1][1]*exp((dt2)*log(1+infl))
             for k in range(1,dt3+1):
                 anc2=anc+dt2+k/12
                 if anc2>mini:

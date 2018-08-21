@@ -1,0 +1,10 @@
+Gabon - Convention Collective SEEG - Execution
+proportion	2
+taux_an	0.0
+gie_deces	1
+mini	1
+mt_mini_mois	0
+maxi	720
+Mtmaxi	999999999999
+debut	fin	droit
+0	100	0.27

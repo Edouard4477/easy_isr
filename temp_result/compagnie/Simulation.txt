@@ -1,7 +1,7 @@
 31-12-2018
-57
+52
 /temp_result/compagnie/salaries.txt
-Cameroun - Convention Collective Commerce
+Gabon - Convention Collective BTP
 0.025
-0
+0.01
 0.05

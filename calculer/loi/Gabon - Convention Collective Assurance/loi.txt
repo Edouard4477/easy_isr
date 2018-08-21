@@ -1,0 +1,14 @@
+Gabon - Convention Collective Assurances
+proportion	2
+taux_an	0.0
+gie_deces	1
+mini	1
+mt_mini_mois	0
+maxi	720
+Mtmaxi	999999999999
+debut	fin	droit
+0	5	0.2
+6	10	0.25
+11	15	0.30
+16	20	0.33
+21	100	0.36
