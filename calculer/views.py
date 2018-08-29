@@ -309,7 +309,7 @@ def entree6(request):
             r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/run.txt','w')
             r.write('1')
             r.write('\n')
-            r.write('100')#modifier pas
+            r.write('25')#modifier pas
             r.close()
             return HttpResponseRedirect('/Attente')
     else:
@@ -434,7 +434,7 @@ def attente(request):
         r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/run.txt','w')
         r.write(str(fin))
         r.write('\n')
-        r.write(str(fin+100))#100 - modifier pas
+        r.write(str(fin+25))#100 - modifier pas
         r.close()
         ratio=int(fin/nb_salarie*100)
         return render(request, 'attente.html',{'ratio':ratio})#HttpResponseRedirect('/Attente')#render(request, 'attente.html',{'fin':fin})

@@ -379,6 +379,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
     
     if prop==2:
         table=readlaw(loi)[7]
+        dem=readlaw(loi)[1]
         loi2=''
         top=0
         for i in range(0,300):
@@ -418,6 +419,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
             for j in range(0,dt2):
                 facteur=(ly[age+j+1][1]-ly[age+j+2][1])/ly[age+1][1]*exp((j)*log(1+infl))
                 somme=0
+                #ajout cas de démission donnant lieu à isr -29/08/2016
                 for k in range(1,12):
                     anc2=anc+j+k/12
                     if anc2>mini:
@@ -426,6 +428,10 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
                         somme=somme+0
                 duration[j][1]=duration[j][1]+facteur*somme
                 prov_dc[i][0]=prov_dc[i][0]+facteur*somme
+                if dem==1:#ajout prise en compte de la démission comme cas de versement de l'isr
+                    facteur2=to/(1-to)*exp((j)*log(1+infl))*lx[age+j+1][1]/lx[age+1][1]
+                    duration[j][0]=duration[j][0]+facteur2*somme
+                    prov_lf[i][0]=prov_lf[i][0]+facteur2*somme
 
             dt3=int((dt-dt2)*12)
             somme = 0
@@ -438,7 +444,10 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
                     somme=somme+0
             duration[dt2][1]=duration[dt2][1]+facteur*somme
             prov_dc[i][0]=prov_dc[i][0]+facteur*somme
-                        
+            if dem==1:
+                facteur2=to/(1-to)*exp((dt2)*log(1+infl))*lx[age+dt2+1][1]/lx[age+1][1]
+                duration[dt2][0]=duration[dt2][0]+facteur2*somme
+                prov_lf[i][0]=prov_lf[i][0]+facteur2*somme        
     
 
     if prop==3:

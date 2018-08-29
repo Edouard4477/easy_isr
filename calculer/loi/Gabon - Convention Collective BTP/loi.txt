@@ -1,6 +1,6 @@
 Gabon - Convention Collective BTP
 proportion	2
-taux_an	0.0
+demission	1
 gie_deces	1
 mini	0
 mt_mini_mois	0

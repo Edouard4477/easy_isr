@@ -1,7 +1,7 @@
 31-12-2018
-52
+60
 /temp_result/compagnie/salaries.txt
 Gabon - Convention Collective BTP
-0.025
-0.01
+0.035
+0.015
 0.05
