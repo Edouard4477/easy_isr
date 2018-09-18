@@ -1,0 +1,14 @@
+Gabon - Convention Collective Minier
+proportion	2
+demission	1
+gie_deces	1
+mini	1
+mt_mini_mois	0
+maxi	720
+Mtmaxi	999999999999
+debut	fin	droit
+0	5	0.2
+6	10	0.25
+11	15	0.3
+16	20	0.35
+21	100	0.37

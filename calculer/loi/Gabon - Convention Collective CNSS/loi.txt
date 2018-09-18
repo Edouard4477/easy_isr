@@ -1,0 +1,10 @@
+Gabon - Convention Collective Commerce
+proportion	2
+demission	1
+gie_deces	1
+mini	2
+mt_mini_mois	0
+maxi	720
+Mtmaxi	999999999999
+debut	fin	droit
+0	100	0.3
