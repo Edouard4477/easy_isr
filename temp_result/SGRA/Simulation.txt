@@ -1,0 +1,7 @@
+31-12-2018
+63
+/temp_result/SGRA/salaries.txt
+Gabon - Convention Collective Secteur Minier
+0.025
+0.01
+0.05

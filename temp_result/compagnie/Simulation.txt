@@ -1,7 +1,7 @@
 31-12-2018
 63
 /temp_result/compagnie/salaries.txt
-Gabon - Convention Collective BTP
-0.035
+Gabon - Convention Collective des Industries du Bois
+0.025
 0.015
-0.05
+0.25

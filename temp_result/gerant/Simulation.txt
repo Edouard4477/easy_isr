@@ -1,0 +1,7 @@
+31-12-2018
+63
+/temp_result/gerant/salaries.txt
+Gabon - Convention Collective Du Groupement des Professionnels du Petrole
+0.03
+0.015
+0.1
