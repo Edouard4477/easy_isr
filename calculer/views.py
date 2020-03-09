@@ -401,7 +401,7 @@ def attente(request):
             
         
     if fin >= nb_salarie:
-        fin=nb_salarie+1
+        fin=nb_salarie
         
     prov=isr(Date_inv,age_retr,fic_employes,loi,tech,infl,to,debut,fin)
     r=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/resultats.txt','w')
