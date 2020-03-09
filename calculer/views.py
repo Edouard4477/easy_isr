@@ -343,7 +343,7 @@ def attente(request):
         v=r.split('\t')
         nb_salarie=nb_salarie+1
 
-    nb_salarie=nb_salarie#modif test
+    nb_salarie=nb_salarie-1#modif test
     f=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/run.txt','r')
     li=f.readlines()
     run=[]
