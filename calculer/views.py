@@ -343,7 +343,7 @@ def attente(request):
         v=r.split('\t')
         nb_salarie=nb_salarie+1
 
-    nb_salarie=nb_salarie-1#modif test
+    #nb_salarie=nb_salarie#modif test
     f=open(chemin_result+'/'+Date_inv+'/'+tech+'/'+to+'/run.txt','r')
     li=f.readlines()
     run=[]
@@ -354,6 +354,8 @@ def attente(request):
         
     debut=int(run[0][0])
     fin=int(run[1][0])
+    if fin>nb_salarie:
+      fin=nb_salarie
     if debut==1:
         prov_vie=0
         prov_deces=0

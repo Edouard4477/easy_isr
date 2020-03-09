@@ -1,0 +1,7 @@
+31-12-2019
+60
+/temp_result/Master/salaries.txt
+Gabon - Code du travail
+0.03
+0.015
+0.1

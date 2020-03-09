@@ -351,7 +351,7 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
         salarie.append(v)
 
     print(nb_salarie)
-    nb_salarie=nb_salarie-1
+    #nb_salarie=nb_salarie-1
     for i in range(1, nb_salarie):
         salarie[i][0]=int(salarie[i][0])
         salarie[i][1]=convert(salarie[i][1])
@@ -360,10 +360,10 @@ def isr(date_inv, age_retr, filepath, loi, tech, infl, to, debut, fin):
         #salarie[i][1]=convert_xls(salarie[i][1]) - pour fichier excel
         #salarie[i][2]=convert_xls(salarie[i][2]) - pour fichier excel
         #salarie[i][3]=float(salarie[i][3]) - pour fichier excel
-        
+    #nb_salarie=nb_salarie-1    
     prov_dc=zeros(shape=(nb_salarie,1))
     prov_lf=zeros(shape=(nb_salarie,1))
-
+    nb_salarie=nb_salarie-1
     prov_vie=0
     prov_deces=0
     masse=0
