@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import dj_database_url
+from .settings import *
 #from os import path as os_path
 #Pour chargement de fichier
 PROJECT_PATH = os.path.abspath(os.path.split(__file__)[0])
@@ -23,12 +25,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_#h0-&i&p3qx#hk&wm0jjam($167_^^8m2j@p4uin!8w)g-x$%'
+#SECRET_KEY = '_#h0-&i&p3qx#hk&wm0jjam($167_^^8m2j@p4uin!8w)g-x$%'
+DATABASES['default'] = dj_database_url.config()
 
+MIDDLEWARE +=['whitenoise.middleware.WhiteNoiseMiddleware']
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+SECRET_KEY = '@yb&tp72ydnre^jt&-72ag&m@85f&mlg0xa^u)^_5$wt1_3e%m'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost','easy-isr-25c0e0bd4cd9.herokuapp.com']
 
 
 # Application definition
