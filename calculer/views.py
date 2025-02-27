@@ -13,7 +13,7 @@ from .forms import UploadFileForm
 from .forms import *
 from .models import *
 from django import forms
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 
 from calculer import *

@@ -1,0 +1,7 @@
+31-12-2019
+60
+/temp_result/test/salaries.txt
+Gabon - Convention Collective Secteur du Commerce
+0.015
+0.01
+0.1
